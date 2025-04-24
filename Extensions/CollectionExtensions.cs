@@ -101,7 +101,6 @@ public static class CollectionExtensions
 	}
 
 	/// <inheritdoc cref="Enumerable.Min{TSource, TResult}(IEnumerable{TSource}, Func{TSource, TResult})"/>
-	/// <param name="defaultValue">A value to return if the collection is null or empty.</param>
 	public static TResult? MinOrDefault<TSource, TResult>(this IEnumerable<TSource>? source, Func<TSource, TResult> selector)
 	{
 		if (source == null || source.Any() == false)

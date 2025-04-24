@@ -9,6 +9,21 @@ namespace easy_core;
 public static class GeneralExtensions
 {
 	/// <summary>
+	/// Returns a GUID that always starts with a letter to be used as an HTML element ID.
+	/// </summary>
+	/// <param name="value"></param>
+	public static Guid ToHtmlId(this Guid value)
+	{
+		var valid = "ABCDEF";
+		var guid = value.ToString("N");
+
+		if (valid.Contains(guid[0]) == false)
+			return Guid.Parse(valid[Random.Shared.Next(valid.Length)] + guid[1..]);
+		else
+			return value;
+	}
+
+	/// <summary>
 	/// Clones the provided options into a new object.
 	/// </summary>
 	/// <param name="value">The options to clone.</param>
