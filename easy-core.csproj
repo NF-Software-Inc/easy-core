@@ -13,8 +13,8 @@
 		<FileVersion>1.2.0.0</FileVersion>
 		<PackageId>Easy.Base</PackageId>
 		<PackageTags>library extensions converters tools</PackageTags>
-		<RepositoryUrl>https://github.com/thirstyape/easy-core</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/thirstyape/easy-core</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/NF-Software-Inc/easy-core</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/NF-Software-Inc/easy-core</PackageProjectUrl>
 		<Description>
 			Contains basic functions and classes to simplify application development of modern applications.
 		</Description>
