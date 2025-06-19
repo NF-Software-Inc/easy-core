@@ -5,12 +5,12 @@
 /// </summary>
 public static class OtpService
 {
-	private const int SecretLength = 15;
-
+	public static int SecretLength { get; set; } = 15;
+	public static long TimeInterval { get; set; } = 30L;
 	/// <summary>
 	/// Returns the current TOTP iteration (based on Unix epoch).
 	/// </summary>
-	public static long CurrentIteration => (long)((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds / 30L);
+	public static long CurrentIteration => (long)((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds / TimeInterval);
 
 	/// <summary>
 	/// Checks that the provided secret and code are equal for the current iteration.
