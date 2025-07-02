@@ -86,8 +86,8 @@ public static class OtpService
 		if (iterationNumber < 0)
 			throw new ArgumentException("The current iteration cannot be below 0", nameof(iterationNumber));
 
-		if (digits < 0 || digits > 24)
-			throw new ArgumentException("The range of return value lengths is 1 to 24", nameof(digits));
+		if (digits < 1 || digits > 10)
+			throw new ArgumentException("The range of return value lengths is 1 to 10", nameof(digits));
 
 		var counter = BitConverter.GetBytes(iterationNumber);
 
