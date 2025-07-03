@@ -5,8 +5,25 @@
 /// </summary>
 public static class OtpService
 {
+	/// <summary>
+	/// The length in characters of the secret hash
+	/// </summary>
 	public static int SecretLength { get; set; } = 15;
-	public static long TimeInterval { get; set; } = 30L;
+	/// <summary>
+	/// The duration in seconds a passcode will be valid
+	/// </summary>
+	private static long _timeInterval = 30L;
+	public static long TimeInterval {
+		get { return _timeInterval; }
+		set
+		{
+			if (value <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(value), value, "TimeInterval must be greater than 0");
+			}
+			_timeInterval = value;
+		}
+	}
 	/// <summary>
 	/// Returns the current TOTP iteration (based on Unix epoch).
 	/// </summary>
