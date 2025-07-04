@@ -112,15 +112,15 @@ public static class OtpService
 			Array.Reverse(counter);
 
 		var hash = HashingService.CreateHash(secret, counter);
-		var offset = hash[^1] & 0xf;
+		var offset = hash[^1] & 0xFL;
 
 		var binary =
-			((hash[offset] & 0x7f) << 24) |
-			((hash[offset + 1] & 0xff) << 16) |
-			((hash[offset + 2] & 0xff) << 8) |
-			(hash[offset + 3] & 0xff);
+			((hash[offset] & 0x7FL) << 24) |
+			((hash[offset + 1] & 0xFFL) << 16) |
+			((hash[offset + 2] & 0xFFL) << 8) |
+			(hash[offset + 3] & 0xFFL);
 
-		var password = binary % (int)Math.Pow(10, digits);
+		var password = binary % (long)Math.Pow(10, digits);
 
 		return password.ToString(new string('0', digits));
 	}
