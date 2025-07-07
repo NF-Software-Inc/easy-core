@@ -5,12 +5,33 @@
 /// </summary>
 public static class OtpService
 {
-	private const int SecretLength = 15;
+	/// <summary>
+	/// The length in characters of the secret hash.
+	/// </summary>
+	public static int SecretLength { get; set; } = 15;
+
+	/// <summary>
+	/// The duration in seconds a passcode will be valid.
+	/// </summary>
+	/// <exception cref="ArgumentOutOfRangeException"></exception>
+	public static long TimeInterval
+	{
+		get { return _timeInterval; }
+		set
+		{
+			if (value <= 0)
+				throw new ArgumentOutOfRangeException(nameof(TimeInterval), value, "The time interval must be greater than 0");
+
+			_timeInterval = value;
+		}
+	}
+
+	private static long _timeInterval = 30L;
 
 	/// <summary>
 	/// Returns the current TOTP iteration (based on Unix epoch).
 	/// </summary>
-	public static long CurrentIteration => (long)((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds / 30L);
+	public static long CurrentIteration => (long)((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds / TimeInterval);
 
 	/// <summary>
 	/// Checks that the provided secret and code are equal for the current iteration.
@@ -29,7 +50,7 @@ public static class OtpService
 			throw new ArgumentException("The provided secret was an invalid length", nameof(secret));
 
 		if (additionalIterations < 0 || additionalIterations > 10)
-			throw new ArgumentOutOfRangeException(nameof(additionalIterations), "The range of iterations is 0 to 10");
+			throw new ArgumentOutOfRangeException(nameof(additionalIterations), additionalIterations, "The range of iterations is 0 to 10");
 
 		if (code == GetOtpCode(secret))
 			return true;
@@ -86,8 +107,8 @@ public static class OtpService
 		if (iterationNumber < 0)
 			throw new ArgumentException("The current iteration cannot be below 0", nameof(iterationNumber));
 
-		if (digits < 0 || digits > 24)
-			throw new ArgumentException("The range of return value lengths is 1 to 24", nameof(digits));
+		if (digits < 1 || digits > 10)
+			throw new ArgumentException("The range of return value lengths is 1 to 10", nameof(digits));
 
 		var counter = BitConverter.GetBytes(iterationNumber);
 
@@ -95,15 +116,15 @@ public static class OtpService
 			Array.Reverse(counter);
 
 		var hash = HashingService.CreateHash(secret, counter);
-		var offset = hash[^1] & 0xf;
+		var offset = hash[^1] & 0xFL;
 
 		var binary =
-			((hash[offset] & 0x7f) << 24) |
-			((hash[offset + 1] & 0xff) << 16) |
-			((hash[offset + 2] & 0xff) << 8) |
-			(hash[offset + 3] & 0xff);
+			((hash[offset] & 0x7FL) << 24) |
+			((hash[offset + 1] & 0xFFL) << 16) |
+			((hash[offset + 2] & 0xFFL) << 8) |
+			(hash[offset + 3] & 0xFFL);
 
-		var password = binary % (int)Math.Pow(10, digits);
+		var password = binary % (long)Math.Pow(10, digits);
 
 		return password.ToString(new string('0', digits));
 	}
