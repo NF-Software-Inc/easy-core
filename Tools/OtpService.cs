@@ -6,24 +6,28 @@
 public static class OtpService
 {
 	/// <summary>
-	/// The length in characters of the secret hash
+	/// The length in characters of the secret hash.
 	/// </summary>
 	public static int SecretLength { get; set; } = 15;
+
 	/// <summary>
-	/// The duration in seconds a passcode will be valid
+	/// The duration in seconds a passcode will be valid.
 	/// </summary>
-	private static long _timeInterval = 30L;
-	public static long TimeInterval {
+	/// <exception cref="ArgumentOutOfRangeException"></exception>
+	public static long TimeInterval
+	{
 		get { return _timeInterval; }
 		set
 		{
 			if (value <= 0)
-			{
-				throw new ArgumentOutOfRangeException(nameof(value), value, "TimeInterval must be greater than 0");
-			}
+				throw new ArgumentOutOfRangeException(nameof(TimeInterval), value, "The time interval must be greater than 0");
+
 			_timeInterval = value;
 		}
 	}
+
+	private static long _timeInterval = 30L;
+
 	/// <summary>
 	/// Returns the current TOTP iteration (based on Unix epoch).
 	/// </summary>
@@ -46,7 +50,7 @@ public static class OtpService
 			throw new ArgumentException("The provided secret was an invalid length", nameof(secret));
 
 		if (additionalIterations < 0 || additionalIterations > 10)
-			throw new ArgumentOutOfRangeException(nameof(additionalIterations), "The range of iterations is 0 to 10");
+			throw new ArgumentOutOfRangeException(nameof(additionalIterations), additionalIterations, "The range of iterations is 0 to 10");
 
 		if (code == GetOtpCode(secret))
 			return true;
