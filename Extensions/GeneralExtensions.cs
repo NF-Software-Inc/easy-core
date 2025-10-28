@@ -138,43 +138,4 @@ public static class GeneralExtensions
 
 		return ok;
 	}
-
-	/// <summary>
-	/// Updates the destination model instance using values from the source model.
-	/// </summary>
-	/// <typeparam name="TModel">The type of model to update.</typeparam>
-	/// <param name="source">The model containing the values to use.</param>
-	/// <param name="destination">The model to update.</param>
-	/// <param name="updateNull">Specifies whether to update null values.</param>
-	/// <param name="properties">The properties of the model to update.</param>
-	[Obsolete("Use other overload.")]
-	public static bool TryUpdateModel<TModel>(this TModel source, TModel destination, bool updateNull, params Expression<Func<TModel, object?>>[] properties) where TModel : class
-	{
-		var ok = true;
-
-		foreach (var prop in properties)
-		{
-			try
-			{
-				var propertyName = prop.GetExpressionPropertyName();
-
-				if (string.IsNullOrWhiteSpace(propertyName))
-				{
-					ok = false;
-					continue;
-				}
-
-				var input = typeof(TModel).GetProperty(propertyName)?.GetValue(source, null);
-
-				if (input != null || updateNull)
-					typeof(TModel).GetProperty(propertyName)!.SetValue(destination, input);
-			}
-			catch
-			{
-				ok = false;
-			}
-		}
-
-		return ok;
-	}
 }
