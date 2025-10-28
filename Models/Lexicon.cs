@@ -83,14 +83,14 @@ public class Lexicon<TKey, TValue> : ILexicon<TKey, TValue>, IDictionary, IColle
 	{
 		get
 		{
-			if (TryGetValue(key, out var list) && index > 0 && index < list.Count)
+			if (TryGetValue(key, out var list) && index >= 0 && index < list.Count)
 				return list[index];
 			else
 				throw new KeyNotFoundException("Specified value does not exist.");
 		}
 		set
 		{
-			if (TryGetValue(key, out var list) && index > 0 && index <= list.Count)
+			if (TryGetValue(key, out var list) && index >= 0 && index <= list.Count)
 			{
 				if (index == list.Count)
 					list.Add(value);
@@ -365,7 +365,7 @@ public class Lexicon<TKey, TValue> : ILexicon<TKey, TValue>, IDictionary, IColle
 	/// <inheritdoc />
 	public bool TryGetValue(TKey key, int index, out TValue value)
 	{
-		if (TryGetValue(key, out var list) && index > 0 && index < list.Count)
+		if (TryGetValue(key, out var list) && index >= 0 && index < list.Count)
 		{
 			value = list[index];
 			return true;

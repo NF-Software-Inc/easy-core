@@ -40,9 +40,9 @@ public class RequiredIfNotNullAttribute : ValidationAttribute
 		var property = validationContext.ObjectType.GetRuntimeProperty(OtherProperty);
 
 		if (property == null)
-			return new ValidationResult("Could not find propert to compare against.");
+			return new ValidationResult("Could not find property to compare against.");
 		else if (property.GetIndexParameters().Length > 0)
-			throw new ArgumentException("Could not find propert to compare against.");
+			throw new ArgumentException("Could not find property to compare against.");
 
 		var otherValue = property.GetValue(validationContext.ObjectInstance, null);
 
