@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>$(MSBuildProjectName.Replace("-", "_"))</RootNamespace>
 		<Authors>NF Software Inc.</Authors>
 		<Company>NF Software Inc.</Company>
 		<Copyright>Copyright 2024 $(Company)</Copyright>
-		<Version>1.2.2</Version>
-		<AssemblyVersion>1.2.2.0</AssemblyVersion>
-		<FileVersion>1.2.2.0</FileVersion>
+		<Version>10.0.0</Version>
+		<AssemblyVersion>10.0.0.0</AssemblyVersion>
+		<FileVersion>10.0.0.0</FileVersion>
 		<PackageId>Easy.Base</PackageId>
 		<PackageTags>library extensions converters tools</PackageTags>
 		<RepositoryUrl>https://github.com/NF-Software-Inc/easy-core</RepositoryUrl>
@@ -19,6 +19,8 @@
 			Contains basic functions and classes to simplify application development of modern applications.
 		</Description>
 		<PackageReleaseNotes>
+			10.0.0 Add support for .NET 10.0
+
 			1.2.2 Add attribute validation classes and lexicon collection
 			1.2.1 Enhancements to OTP generation
 			1.2.0 Drop support for .NET 6.0 and add support for .NET 9.0
