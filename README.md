@@ -7,9 +7,9 @@
 
 ## Versioning Notice
 
-As of version 10.0.0, Easy Core has adopted a new versioning scheme that aligns with .NET release cycle. This change is intended to provide better clarity and consistency with regard to supported frameworks.
+As of version 10.0.0, Easy Core has adopted a new versioning scheme that aligns its major version with the .NET major version it targets. This change is intended to provide better clarity and consistency with regard to supported frameworks.
 
-Going forward, Easy Core will be versioned based on the .NET version it targets. For example, Easy Core 10.x.x will correspond to .NET 10.x.x. The minor version will be used for any larger updates as well as when outdated .NET versions are no longer supported.
+Going forward, the major version of Easy Core will correspond to the major version of .NET it targets (e.g., Easy Core 10.x.x targets .NET 10). The minor and patch versions are used for library-specific updates and do not map to .NET's minor or SDK versions.
 
 ## Getting Started
 
