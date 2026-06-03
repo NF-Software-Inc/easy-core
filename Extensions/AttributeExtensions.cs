@@ -144,8 +144,8 @@ public static class AttributeExtensions
 
 		var attribute = value.GetType()
 			.GetMember(memberName)
-			.First()
-			.GetCustomAttribute<TAttribute>();
+			.FirstOrDefault()
+			?.GetCustomAttribute<TAttribute>();
 
 		return attribute;
 	}
