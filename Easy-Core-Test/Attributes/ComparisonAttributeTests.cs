@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace easy_core.Tests.Attributes;
+namespace Easy_Core_Test.Attributes;
 
 /// <summary>
 /// Tests for the comparison and conditional validation attributes.

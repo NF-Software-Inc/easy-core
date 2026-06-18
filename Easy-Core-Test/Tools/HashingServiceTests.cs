@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace easy_core.Tests.Tools;
+namespace Easy_Core_Test.Tools;
 
 /// <summary>
 /// Tests for <see cref="HashingService"/>.

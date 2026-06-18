@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using System.Text.Json;
 
-namespace easy_core.Tests.Extensions;
+namespace Easy_Core_Test.Extensions;
 
 /// <summary>
 /// Tests for <see cref="GeneralExtensions"/>.

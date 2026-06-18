@@ -1,4 +1,4 @@
-namespace easy_core.Tests.Models;
+namespace Easy_Core_Test.Models;
 
 /// <summary>
 /// Tests for <see cref="Lexicon{TKey, TValue}"/>.

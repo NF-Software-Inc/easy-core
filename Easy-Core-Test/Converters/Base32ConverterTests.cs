@@ -1,4 +1,4 @@
-namespace easy_core.Tests.Converters;
+namespace Easy_Core_Test.Converters;
 
 /// <summary>
 /// Tests for <see cref="Base32Converter"/>.

@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace easy_core.Tests.Tools;
+namespace Easy_Core_Test.Tools;
 
 /// <summary>
 /// Tests for <see cref="PredicateBuilder"/>.
