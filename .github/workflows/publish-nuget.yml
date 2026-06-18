@@ -40,12 +40,12 @@ jobs:
           9.0.x
           8.0.x
     - name: Install Dependencies
-      run: dotnet restore easy-core.csproj
+      run: dotnet restore Easy-Core/Easy-Core.csproj
     - run: mkdir ${{ env.TempDirectory }}
     - name: Build & Pack
       run: |
-        dotnet build easy-core.csproj --configuration Release
-        dotnet pack easy-core.csproj --configuration Release --output ${{ env.TempDirectory }} /p:AssemblyVersion=${{ env.PublishVersion }} /p:Version=${{ inputs.version }} /p:FileVersion=${{ env.PublishVersion }}
+        dotnet build Easy-Core/Easy-Core.csproj --configuration Release
+        dotnet pack Easy-Core/Easy-Core.csproj --configuration Release --output ${{ env.TempDirectory }} /p:AssemblyVersion=${{ env.PublishVersion }} /p:Version=${{ inputs.version }} /p:FileVersion=${{ env.PublishVersion }}
     - uses: actions/upload-artifact@v4.6.2
       with:
         name: NuGet-Unsigned

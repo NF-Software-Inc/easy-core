@@ -1,3 +1,4 @@
 <Solution>
-  <Project Path="easy-core.csproj" />
+  <Project Path="Easy-Core/Easy-Core.csproj" />
+  <Project Path="Easy-Core-Test/Easy-Core-Test.csproj" />
 </Solution>

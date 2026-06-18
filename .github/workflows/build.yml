@@ -27,6 +27,8 @@ jobs:
           9.0.x
           8.0.x
     - name: Install dependencies
-      run: dotnet restore easy-core.csproj
+      run: dotnet restore easy-core.sln
     - name: Build
-      run: dotnet build easy-core.csproj --configuration Release
+      run: dotnet build easy-core.sln --configuration Release --no-restore
+    - name: Test
+      run: dotnet test easy-core.sln --configuration Release --no-build --verbosity normal
