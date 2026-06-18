@@ -27,6 +27,23 @@ jobs:
           9.0.x
           8.0.x
     - name: Install dependencies
-      run: dotnet restore easy-core.csproj
+      run: dotnet restore Easy-Core.csproj
+      working-directory: ./Easy-Core
     - name: Build
-      run: dotnet build easy-core.csproj --configuration Release
+      run: dotnet build Easy-Core.csproj --configuration Release
+      working-directory: ./Easy-Core
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4.2.2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4.3.1
+      with:
+        dotnet-version: |
+          10.0.x
+          9.0.x
+          8.0.x
+    - name: Install dependencies
+      run: dotnet restore ./Easy-Core-Test/Easy-Core-Test.csproj
+    - name: Test
+      run: dotnet test --configuration Release ./Easy-Core-Test/Easy-Core-Test.csproj
