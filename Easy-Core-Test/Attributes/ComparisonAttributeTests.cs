@@ -10,15 +10,19 @@ public class ComparisonAttributeTests
 	private class GreaterThanModel
 	{
 		[GreaterThan(nameof(Lower))]
+		[GreaterThan(nameof(Null), IgnoreNull = true)]
 		public int Higher { get; set; }
 		public int Lower { get; set; }
+		public int? Null { get; set; }
 	}
 
 	private class LessThanModel
 	{
 		[LessThan(nameof(Higher))]
+		[LessThan(nameof(Null), IgnoreNull = true)]
 		public int Lower { get; set; }
 		public int Higher { get; set; }
+		public int? Null { get; set; }
 	}
 
 	private class GreaterThanOrEqualModel
@@ -57,23 +61,25 @@ public class ComparisonAttributeTests
 	}
 
 	[Theory]
-	[InlineData(5, 1, true)]
-	[InlineData(5, 5, false)]
-	[InlineData(1, 5, false)]
-	public void GreaterThan_ValidatesProperly(int higher, int lower, bool isValid)
+	[InlineData(5, 1, null, true)]
+	[InlineData(5, 1, 3, true)]
+	[InlineData(5, 5, 5, false)]
+	[InlineData(1, 5, 5, false)]
+	public void GreaterThan_ValidatesProperly(int higher, int lower, int? nullTest, bool isValid)
 	{
-		var results = Validate(new GreaterThanModel { Higher = higher, Lower = lower });
+		var results = Validate(new GreaterThanModel { Higher = higher, Lower = lower, Null = nullTest });
 
 		Assert.Equal(isValid, results.Count == 0);
 	}
 
 	[Theory]
-	[InlineData(1, 5, true)]
-	[InlineData(5, 5, false)]
-	[InlineData(5, 1, false)]
-	public void LessThan_ValidatesProperly(int lower, int higher, bool isValid)
+	[InlineData(1, 5, null, true)]
+	[InlineData(1, 5, 1, true)]
+	[InlineData(5, 5, 5, false)]
+	[InlineData(5, 1, 1, false)]
+	public void LessThan_ValidatesProperly(int lower, int higher, int? nullTest, bool isValid)
 	{
-		var results = Validate(new LessThanModel { Lower = lower, Higher = higher });
+		var results = Validate(new LessThanModel { Lower = lower, Higher = higher, Null = nullTest });
 
 		Assert.Equal(isValid, results.Count == 0);
 	}
