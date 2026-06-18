@@ -4,8 +4,7 @@
 		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<RootNamespace>easy_core</RootNamespace>
-		<AssemblyName>easy-core</AssemblyName>
+		<RootNamespace>$(MSBuildProjectName.Replace("-", "_"))</RootNamespace>
 		<Authors>NF Software Inc.</Authors>
 		<Company>NF Software Inc.</Company>
 		<Copyright>Copyright 2024 $(Company)</Copyright>
@@ -20,7 +19,6 @@
 			Contains basic functions and classes to simplify application development of modern applications.
 		</Description>
 		<PackageReleaseNotes>
-			10.0.2 Add unit testing project and reorganize repository structure
 			10.0.1 Update GetValueAttribute to prevent exception
 			10.0.0 Add support for .NET 10.0
 
@@ -72,13 +70,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove=".gitignore" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\icon.png" Pack="True" PackagePath="" />
-		<None Include="..\LICENSE" Pack="True" PackagePath="" />
-		<None Include="..\README.md" Pack="True" PackagePath="" />
+		<None Include="icon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
 	</ItemGroup>
 
 </Project>
