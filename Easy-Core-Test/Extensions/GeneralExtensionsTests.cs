@@ -117,4 +117,40 @@ public class GeneralExtensionsTests
 		Assert.Equal(1, destination.Id);
 		Assert.Equal("src", destination.Name);
 	}
+
+	[Fact]
+	public void DeserializeAnonymousType_PopulatesFields()
+	{
+		var json = """{"name":"Alice","age":30}""";
+		var template = new { name = "", age = 0 };
+
+		var result = json.DeserializeAnonymousType(template);
+
+		Assert.NotNull(result);
+		Assert.Equal("Alice", result.name);
+		Assert.Equal(30, result.age);
+	}
+
+	[Fact]
+	public void DeserializeAnonymousType_WithOptions_RespectsOptions()
+	{
+		// JSON keys are uppercase; options enable case-insensitive matching
+		var json = """{"NAME":"Bob","AGE":25}""";
+		var template = new { name = "", age = 0 };
+		var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
+		var result = json.DeserializeAnonymousType(template, options);
+
+		Assert.NotNull(result);
+		Assert.Equal("Bob", result.name);
+		Assert.Equal(25, result.age);
+	}
+
+	[Fact]
+	public void DeserializeAnonymousType_InvalidJson_ThrowsJsonException()
+	{
+		var template = new { name = "" };
+
+		Assert.Throws<JsonException>(() => "not valid json".DeserializeAnonymousType(template));
+	}
 }
