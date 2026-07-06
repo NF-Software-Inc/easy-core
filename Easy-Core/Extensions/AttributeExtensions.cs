@@ -168,10 +168,7 @@ public static class AttributeExtensions
         if (property == null)
             return null;
 
-        // Get the [Display] attribute from the property (null if not decorated)
         var displayAttribute = property.GetCustomAttribute<DisplayAttribute>();
-
-        // Let the caller decide what to read from it (Name, Description, etc.)
         return displayAttribute != null ? propertyAccessor(displayAttribute) : null;
     }
 
@@ -224,9 +221,6 @@ public static class AttributeExtensions
             return null;
 
         var displayAttribute = member.GetCustomAttribute<DisplayAttribute>();
-
         return displayAttribute != null ? propertyAccessor(displayAttribute) : null;
     }
-
-
 }

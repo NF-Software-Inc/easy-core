@@ -109,8 +109,6 @@ public class AttributeExtensionsTests
 		Assert.Null(typeof(SampleType).GetTypeAttribute<ObsoleteAttribute>());
 	}
 
-	// --- GetTypeAttribute(selector) ---
-
 	[Fact]
 	public void GetTypeAttribute_WithSelector_ReadsValue()
 	{
@@ -120,11 +118,8 @@ public class AttributeExtensionsTests
 	[Fact]
 	public void GetTypeAttribute_WithSelector_ReturnsNullWhenNoAttribute()
 	{
-		// AttributeExtensionsTests has no [Display], so selector never runs
 		Assert.Null(typeof(AttributeExtensionsTests).GetTypeAttribute(d => d.GetName()));
 	}
-
-	// --- GetPropertyAttribute(expression, selector) ---
 
 	[Fact]
 	public void GetPropertyAttribute_ByExpression_WithSelector_ReadsValue()
@@ -138,14 +133,11 @@ public class AttributeExtensionsTests
 	[Fact]
 	public void GetPropertyAttribute_ByExpression_WithSelector_ReturnsNullWhenNoAttribute()
 	{
-		// Plain has no [Display], so selector never runs
 		var instance = new SampleType();
 		Expression<Func<string?>> expression = () => instance.Plain;
 
 		Assert.Null(expression.GetPropertyAttribute(d => d.GetName()));
 	}
-
-	// --- GetPropertyAttribute(Type, name, selector) ---
 
 	[Fact]
 	public void GetPropertyAttribute_ByType_WithSelector_ReadsValue()
@@ -162,11 +154,8 @@ public class AttributeExtensionsTests
 	[Fact]
 	public void GetPropertyAttribute_ByType_WithSelector_ReturnsNullWhenNoAttribute()
 	{
-		// Plain exists but has no [Display]
 		Assert.Null(typeof(SampleType).GetPropertyAttribute(nameof(SampleType.Plain), d => d.GetName()));
 	}
-
-	// --- GetValueAttribute(value, selector) ---
 
 	[Fact]
 	public void GetValueAttribute_ByValue_WithSelector_ReadsValue()
@@ -177,11 +166,8 @@ public class AttributeExtensionsTests
 	[Fact]
 	public void GetValueAttribute_ByValue_WithSelector_ReturnsNullWhenNoAttribute()
 	{
-		// Second has no [Display], so selector never runs
 		Assert.Null(SampleEnum.Second.GetValueAttribute(d => d.GetName()));
 	}
-
-	// --- GetValueAttribute(Type, memberName, selector) ---
 
 	[Fact]
 	public void GetValueAttribute_ByType_WithSelector_ReadsValue()
@@ -198,7 +184,6 @@ public class AttributeExtensionsTests
 	[Fact]
 	public void GetValueAttribute_ByType_WithSelector_ReturnsNullWhenNoAttribute()
 	{
-		// Second exists but has no [Display]
 		Assert.Null(typeof(SampleEnum).GetValueAttribute("Second", d => d.GetName()));
 	}
 }
