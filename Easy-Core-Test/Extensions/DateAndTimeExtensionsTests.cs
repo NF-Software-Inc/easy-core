@@ -102,6 +102,48 @@ public class DateAndTimeExtensionsTests
 	}
 
 	[Fact]
+	public void ListDaysTo_DateTime_NegativeStep_IteratesInReverse()
+	{
+		var start = new DateTime(2024, 1, 5);
+		var end = new DateTime(2024, 1, 1);
+
+		var days = start.ListDaysTo(end, -1).ToList();
+
+		Assert.Equal(5, days.Count);
+		Assert.Equal(start, days[0]);
+		Assert.Equal(end, days[^1]);
+	}
+
+	[Fact]
+	public void ListDaysTo_DateOnly_NegativeStep_IteratesInReverse()
+	{
+		var start = new DateOnly(2024, 1, 5);
+		var end = new DateOnly(2024, 1, 1);
+
+		var days = start.ListDaysTo(end, -1).ToList();
+
+		Assert.Equal(5, days.Count);
+		Assert.Equal(start, days[0]);
+		Assert.Equal(end, days[^1]);
+	}
+
+	[Fact]
+	public void ListDaysTo_DateTime_ZeroStep_ReturnsEmpty()
+	{
+		var days = new DateTime(2024, 1, 1).ListDaysTo(new DateTime(2024, 1, 5), 0).ToList();
+
+		Assert.Empty(days);
+	}
+
+	[Fact]
+	public void ListDaysTo_DateOnly_ZeroStep_ReturnsEmpty()
+	{
+		var days = new DateOnly(2024, 1, 1).ListDaysTo(new DateOnly(2024, 1, 5), 0).ToList();
+
+		Assert.Empty(days);
+	}
+
+	[Fact]
 	public void ToCustomString_DefaultSettings_FormatsHoursMinutesSeconds()
 	{
 		var time = new TimeSpan(5, 30, 15);

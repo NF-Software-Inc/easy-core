@@ -108,4 +108,82 @@ public class AttributeExtensionsTests
 		Assert.NotNull(typeof(SampleType).GetTypeAttribute<DisplayAttribute>());
 		Assert.Null(typeof(SampleType).GetTypeAttribute<ObsoleteAttribute>());
 	}
+
+	[Fact]
+	public void GetTypeAttribute_WithSelector_ReadsValue()
+	{
+		Assert.Equal("Sample Display", typeof(SampleType).GetTypeAttribute(d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetTypeAttribute_WithSelector_ReturnsNullWhenNoAttribute()
+	{
+		Assert.Null(typeof(AttributeExtensionsTests).GetTypeAttribute(d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetPropertyAttribute_ByExpression_WithSelector_ReadsValue()
+	{
+		var instance = new SampleType();
+		Expression<Func<string?>> expression = () => instance.Name;
+
+		Assert.Equal("Display Name", expression.GetPropertyAttribute(d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetPropertyAttribute_ByExpression_WithSelector_ReturnsNullWhenNoAttribute()
+	{
+		var instance = new SampleType();
+		Expression<Func<string?>> expression = () => instance.Plain;
+
+		Assert.Null(expression.GetPropertyAttribute(d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetPropertyAttribute_ByType_WithSelector_ReadsValue()
+	{
+		Assert.Equal("Display Name", typeof(SampleType).GetPropertyAttribute(nameof(SampleType.Name), d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetPropertyAttribute_ByType_WithSelector_ReturnsNullForMissingProperty()
+	{
+		Assert.Null(typeof(SampleType).GetPropertyAttribute("Missing", d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetPropertyAttribute_ByType_WithSelector_ReturnsNullWhenNoAttribute()
+	{
+		Assert.Null(typeof(SampleType).GetPropertyAttribute(nameof(SampleType.Plain), d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetValueAttribute_ByValue_WithSelector_ReadsValue()
+	{
+		Assert.Equal("First Option", SampleEnum.First.GetValueAttribute(d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetValueAttribute_ByValue_WithSelector_ReturnsNullWhenNoAttribute()
+	{
+		Assert.Null(SampleEnum.Second.GetValueAttribute(d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetValueAttribute_ByType_WithSelector_ReadsValue()
+	{
+		Assert.Equal("First Option", typeof(SampleEnum).GetValueAttribute("First", d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetValueAttribute_ByType_WithSelector_ReturnsNullForMissingMember()
+	{
+		Assert.Null(typeof(SampleEnum).GetValueAttribute("Missing", d => d.GetName()));
+	}
+
+	[Fact]
+	public void GetValueAttribute_ByType_WithSelector_ReturnsNullWhenNoAttribute()
+	{
+		Assert.Null(typeof(SampleEnum).GetValueAttribute("Second", d => d.GetName()));
+	}
 }

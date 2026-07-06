@@ -60,15 +60,26 @@ public static class GeneralExtensions
 		return cloned;
 	}
 
-	/// <summary>
-	/// Creates a lambda expression for the provided property.
-	/// </summary>
-	/// <typeparam name="TEntity">The type the property exists within.</typeparam>
-	/// <param name="propertyName">The name of the property to return.</param>
-	/// <remarks>
-	/// Use a dot '.' notation to indicate nested properties (ex. ParentClass.ChildClass.PropertyName).
-	/// </remarks>
-	public static Expression<Func<TEntity, object>> ToLambda<TEntity>(this string propertyName)
+    /// <summary>
+    /// Deserializes the JSON string into an anonymous type using the provided template.
+    /// </summary>
+    /// <typeparam name="T">The type of the anonymous object.</typeparam>
+    /// <param name="json">The JSON string to deserialize.</param>
+    /// <param name="_">An instance of the anonymous type to use as a template.</param>
+    /// <param name="options">Optional JSON serializer options.</param>
+    /// <returns>The deserialized anonymous object.</returns>
+    public static T? DeserializeAnonymousType<T>(this string json, T _, JsonSerializerOptions? options = null)
+		=> JsonSerializer.Deserialize<T>(json, options);
+
+    /// <summary>
+    /// Creates a lambda expression for the provided property.
+    /// </summary>
+    /// <typeparam name="TEntity">The type the property exists within.</typeparam>
+    /// <param name="propertyName">The name of the property to return.</param>
+    /// <remarks>
+    /// Use a dot '.' notation to indicate nested properties (ex. ParentClass.ChildClass.PropertyName).
+    /// </remarks>
+    public static Expression<Func<TEntity, object>> ToLambda<TEntity>(this string propertyName)
 	{
 		var parameter = Expression.Parameter(typeof(TEntity));
 		var current = parameter as Expression;

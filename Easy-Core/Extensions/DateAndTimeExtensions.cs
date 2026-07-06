@@ -239,10 +239,13 @@ public static class DateAndTimeExtensions
 	/// </summary>
 	/// <param name="start">The date to start at.</param>
 	/// <param name="end">The date to end at.</param>
-	/// <param name="step">The number of days use as an interval.</param>
+	/// <param name="step">The number of days used as an interval. Use a negative value to iterate in reverse.</param>
 	public static IEnumerable<DateTime> ListDaysTo(this DateTime start, DateTime end, int step = 1)
 	{
-		for (var day = start.Date; day.Date <= end.Date; day = day.AddDays(step))
+		if (step == 0)
+			yield break;
+
+		for (var day = start.Date; step > 0 ? day.Date <= end.Date : day.Date >= end.Date; day = day.AddDays(step))
 			yield return day;
 	}
 
@@ -251,10 +254,13 @@ public static class DateAndTimeExtensions
 	/// </summary>
 	/// <param name="start">The date to start at.</param>
 	/// <param name="end">The date to end at.</param>
-	/// <param name="step">The number of days use as an interval.</param>
+	/// <param name="step">The number of days used as an interval. Use a negative value to iterate in reverse.</param>
 	public static IEnumerable<DateOnly> ListDaysTo(this DateOnly start, DateOnly end, int step = 1)
 	{
-		for (var day = start; day <= end; day = day.AddDays(step))
+		if (step == 0)
+			yield break;
+
+		for (var day = start; step > 0 ? day <= end : day >= end; day = day.AddDays(step))
 			yield return day;
 	}
 

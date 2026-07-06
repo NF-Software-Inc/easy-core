@@ -74,7 +74,7 @@ public class ComparisonAttributeTests
 
 	[Theory]
 	[InlineData(1, 5, null, true)]
-	[InlineData(1, 5, 1, true)]
+	[InlineData(1, 5, 5, true)]
 	[InlineData(5, 5, 5, false)]
 	[InlineData(5, 1, 1, false)]
 	public void LessThan_ValidatesProperly(int lower, int higher, int? nullTest, bool isValid)
