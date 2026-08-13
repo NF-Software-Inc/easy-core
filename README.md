@@ -5,9 +5,30 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/NF-Software-Inc/easy-core/build.yml)](https://github.com/NF-Software-Inc/easy-core/actions/workflows/build.yml)
 [![Publish](https://img.shields.io/github/actions/workflow/status/NF-Software-Inc/easy-core/publish.yml?label=publish)](https://github.com/NF-Software-Inc/easy-core/actions/workflows/publish.yml)
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Versioning Notice](#versioning-notice)
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [Development Setup](#development-setup)
+- [Supported Frameworks](#supported-frameworks)
+- [Contributing](#contributing)
+- [Authors](#authors)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
 ## Overview
 
 Easy Core is a .NET utility library that provides reusable components for common application development tasks. It includes extension methods, security services, validation attributes, converters, and utility helpers to simplify and accelerate modern .NET application development.
+
+## Versioning Notice
+
+As of version 10.0.0, Easy Core uses a versioning scheme aligned with the .NET major version it targets:
+
+- **Easy Core 10.x.x** targets **.NET 10.x**
+- Major version = .NET major version
+- Minor and patch versions for library-specific updates
 
 ## Quick Start
 
@@ -157,14 +178,6 @@ Easy-Core/
 - .NET 8.0
 - .NET 9.0
 - .NET 10.0
-
-## Versioning Notice
-
-As of version 10.0.0, Easy Core uses a versioning scheme aligned with the .NET major version it targets:
-
-- **Easy Core 10.x.x** targets **.NET 10.x**
-- Major version = .NET major version
-- Minor and patch versions for library-specific updates
 
 ## Contributing
 
