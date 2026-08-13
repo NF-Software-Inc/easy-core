@@ -26,7 +26,8 @@ Easy Core is a .NET utility library that provides reusable components for common
 
 As of version 10.0.0, Easy Core uses a versioning scheme aligned with the .NET major version it targets:
 
-- **Easy Core 10.x.x** includes a **.NET 10.x** target (and multi-targets **.NET 8/9** for compatibility)
+- **Easy Core 10.x.x** includes a **.NET 10.x** target (and multi-targets **.NET 8/9** for compatibility)
+
 - Major version = .NET major version
 - Minor and patch versions for library-specific updates
 
@@ -63,7 +64,7 @@ var csv = "Hello, World".ToCsvString(); // Format for CSV
 ```csharp
 var numbers = new[] { 1, 2, 3, 4, 5 };
 
-// Check if null or empty
+if (numbers.IsNullOrEmpty() == false)
 if (numbers.IsNotNullOrEmpty())
 {
     // Use collection
